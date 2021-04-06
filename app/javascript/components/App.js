@@ -1,5 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
+import ApartmentIndex from './pages/ApartmentIndex.js'
+import ApartmentShow from './pages/ApartmentIndex.js'
 import mockApartments from './MockApartments.js'
 import {
   BrowserRouter as Router,
@@ -25,12 +27,6 @@ class App extends React.Component {
     } = this.props
     return (
       <Router>
-        <Switch>
-          <Route exact path="/" component={ Home } />
-          <Route path="/apartmentindex" component={ CatIndex } />
-          <Route path="/apartmentshow/:id" component={ CatShow } />
-          <Route component={ NotFound }/>
-        </Switch>
         <React.Fragment>
            { logged_in &&
              <div>
