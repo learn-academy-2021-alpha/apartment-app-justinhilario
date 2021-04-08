@@ -1,14 +1,15 @@
 import React from "react"
 import PropTypes from "prop-types"
 import ApartmentIndex from './pages/ApartmentIndex.js'
-import ApartmentShow from './pages/ApartmentIndex.js'
-import mockApartments from './MockApartments.js'
+import ApartmentShow from './pages/ApartmentShow.js'
+import mockApartments from './mockApartments.js'
 import {
   BrowserRouter as Router,
   Route,
   Switch
 } from 'react-router-dom'
 
+// setting state to be the mock apartments we created
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -16,6 +17,9 @@ class App extends React.Component {
       apartments: mockApartments
     }
   }
+
+  //Router wraps route funct
+  //Switch manages what page displayed
 
   render() {
     const {
@@ -25,20 +29,37 @@ class App extends React.Component {
       sign_in_route,
       sign_out_route
     } = this.props
+    console.log(mockApartments)
     return (
       <Router>
-        <React.Fragment>
-           { logged_in &&
-             <div>
-               <a href={sign_out_route }>Sign Out</a>
-             </div>
-           }
-           { !logged_in &&
-             <div>
-              <a href={ sign_in_route }>Sign In</a>
-            </div>
-            }
-        </React.Fragment>
+        <Switch>
+          <Route path="/apartmentindex" render={ () => <ApartmentIndex apartments={ this.state.apartments } /> } />
+          <Route
+            exact path="/apartmentshow/:id"
+            render={ (props) => {
+              let id = parseInt(props.match.params.id)
+              let apt = this.state.apartments.find( 
+                apt => apt.id === id)
+              return (
+                <ApartmentShow
+                    apartment={ apt }
+                />
+              ) 
+            }}
+          />
+          <React.Fragment>
+            { logged_in &&
+                <div>
+                 <a href={sign_out_route }>Sign Out</a>
+               </div>
+              }
+              { !logged_in &&
+               <div>
+                  <a href={ sign_in_route }>Sign In</a>
+              </div>
+              }
+          </React.Fragment>
+        </Switch>
       </Router>
       
     )
