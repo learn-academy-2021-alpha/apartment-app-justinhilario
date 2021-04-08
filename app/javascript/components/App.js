@@ -10,6 +10,11 @@ import {
 } from 'react-router-dom'
 import Home from './pages/Home'
 import Header from './components/Header'
+import ApartmentNew from './pages/ApartmentNew'
+import ApartmentUpdate from './pages/ApartmentUpdate'
+import ManageProperties from './pages/ManageProperties'
+
+
 
 // setting state to be the mock apartments we created
 class App extends React.Component {
@@ -20,6 +25,17 @@ class App extends React.Component {
     }
   }
 
+  createNewApartment = (apartment) => {
+        console.log(apartment)
+  }
+
+  updateApartment = (apartment, id) => {
+    console.log(apartment, id)
+  }
+
+  deleteProperty = (id) => {
+    console.log(id)
+  }
   //Router wraps route funct
   //Switch manages what page displayed
 
@@ -32,6 +48,8 @@ class App extends React.Component {
       sign_out_route
     } = this.props
     console.log(mockApartments)
+    console.log("logged_in:", logged_in)
+    console.log("current user:", current_user)
     return (
       <Router>
         <Header 
@@ -55,6 +73,47 @@ class App extends React.Component {
               ) 
             }}
           />
+           { logged_in &&
+            <Route
+              path="/manageproperties"
+              render={ (props) => {
+                let myProperties = this.state.apartments.filter(
+                  apartment => apartment.user_id === current_user.id )
+                return (
+                  <ManageProperties
+                    myProperties={ myProperties }
+                    deleteProperty={ this.deleteProperty }
+                  />
+                )
+              }}
+            />
+          }
+          { logged_in && 
+              <Route
+              path="/apartmentnew"
+              render={ (props) =>
+                <ApartmentNew
+                  createNewApartment={ this.createNewApartment }
+                />
+              }
+            />  
+          }
+          { logged_in && 
+              <Route
+                path="/apartmentupdate/:id"
+                render={ (props) => {
+                  let id = parseInt(props.match.params.id)
+                  let updateApt = this.state.apartments.find( 
+                    updateApt => updateApt.id === id)
+                  return(
+                    <ApartmentUpdate
+                      updateApartment={ this.updateApartment }
+                      apartment = { updateApt }
+                    />
+                  )
+                }}
+              />  
+          }
           <React.Fragment>
             { logged_in &&
                 <div>
@@ -73,6 +132,5 @@ class App extends React.Component {
     )
   }
 }
-
 
 export default App

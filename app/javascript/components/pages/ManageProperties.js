@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Card,CardBody, CardTitle, CardSubtitle, CardText, CardLink, Row, Col, Container} from 'reactstrap'
 
-
-class ApartmentIndex extends Component {
+class ManageProperties extends Component {
     render () {
         return (
             <>
-                <h2> Real Estate & Homes For Sale </h2>
+                <h2> My Property Management </h2>
                 <Container fluid>
                     <Row xs="2">
-                        { this.props.apartments.map((apartment) => {
+                        { this.props.myProperties.map((apartment) => {
                             return (
                             <Col md="4">
                                 <Card key= { apartment.id }>
@@ -21,13 +20,19 @@ class ApartmentIndex extends Component {
                                     <img width="100%" src= {apartment.image} alt="home hero image" />
                                     <CardBody>
                                         <CardText> 
-                                            { apartment.street }, { apartment.city }, {apartment.state } { apartment.zip }
+                                            { apartment.street }, { apartment.city }, {apartment.state }
                                             <br></br>
                                             {apartment.sqft} Square Feet
                                             <br></br>
                                             ${apartment.listprice}
                                             </CardText>
-                                        <NavLink to={ `/apartmentshow/${apartment.id}` }>More Info</NavLink>
+                                        <NavLink to={ `/apartmentshow/${apartment.id}` }>View Property</NavLink>
+                                        <NavLink to={ `/apartmentupdate/${apartment.id}` }>Edit Property</NavLink>
+                                        <Navlink to="/manageproperties">
+                                            <Button onClick={ () => this.props.deleteApartment(apartment.id) }>
+                                            Remove Listing
+                                            </Button>
+                                        </Navlink>
                                     </CardBody>
                                 </Card>
                             </Col>
@@ -40,4 +45,4 @@ class ApartmentIndex extends Component {
     }
 }
 
-export default ApartmentIndex
+export default ManageProperties

@@ -13,7 +13,7 @@ class ApartmentShow extends Component {
         console.log(apartment)
         return (
             <>
-                <h3>{ apartment.name }</h3>
+                <h3>{ apartment.street }</h3>
             
               
             </>

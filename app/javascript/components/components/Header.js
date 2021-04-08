@@ -5,7 +5,6 @@ import {
     Nav,
     NavItem,
     NavLink,
-    NavbarText
   } from 'reactstrap';
 
 class Header extends Component {
@@ -23,20 +22,25 @@ class Header extends Component {
                         <NavbarBrand href="/">ZILLOW</NavbarBrand>
                             <Nav className="mr-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="/">Buy</NavLink>
+                                    <NavLink href="/apartmentindex">Buy</NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href="/apartmentindex">Advertise</NavLink>
+                                    <NavLink href="/apartmentnew">Sell</NavLink>
                                 </NavItem>
                                 <NavItem className="ml-auto" navbar>
-                                    <NavLink href="/apartmentindex">Manage Properties</NavLink>
+                                    <NavLink href="/manageproperties">Manage Properties</NavLink>
                                 </NavItem>
                             </Nav>
                             { !logged_in &&
                                 <NavItem>
                                     <a href={ sign_in_route }>Sign In</a>
                                 </NavItem>
-                            }     
+                            }
+                            { logged_in &&
+                                <NavItem>
+                                    <a href={sign_out_route }>Sign Out</a>
+                                </NavItem>
+                            }
                     </Navbar>
                 </>
             )
