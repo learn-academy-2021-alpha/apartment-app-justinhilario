@@ -7,12 +7,11 @@ class ApartmentIndex extends Component {
     render () {
         return (
             <>
-                <h2> Homes for sale </h2>
-                  { this.props.apartments.map((apartment) => {
-                    console.log(apartment)
-                    return (
-                    <Container fluid>
-                        <Row xs="2">
+                <h2> Dreams for sale </h2>
+                <Container fluid>
+                    <Row xs="2">
+                        { this.props.apartments.map((apartment) => {
+                            return (
                             <Col md="4">
                                 <Card key= { apartment.id }>
                                     <CardBody>
@@ -32,10 +31,10 @@ class ApartmentIndex extends Component {
                                     </CardBody>
                                 </Card>
                             </Col>
-                        </Row>
-                    </Container>
-                    )
-                  })}
+                            )   
+                        })}
+                    </Row>
+                </Container>
             </>
         )
     }

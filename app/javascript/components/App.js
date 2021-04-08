@@ -8,6 +8,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import Home from './pages/Home'
 
 // setting state to be the mock apartments we created
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
+          <Route exact path="/" component={ Home } />
           <Route path="/apartmentindex" render={ () => <ApartmentIndex apartments={ this.state.apartments } /> } />
           <Route
             exact path="/apartmentshow/:id"
