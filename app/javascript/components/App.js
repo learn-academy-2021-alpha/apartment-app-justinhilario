@@ -9,6 +9,7 @@ import {
   Switch
 } from 'react-router-dom'
 import Home from './pages/Home'
+import Header from './components/Header'
 
 // setting state to be the mock apartments we created
 class App extends React.Component {
@@ -33,6 +34,11 @@ class App extends React.Component {
     console.log(mockApartments)
     return (
       <Router>
+        <Header 
+          logged_in={ logged_in }
+          sign_in_route={ sign_in_route }
+          sign_out_route={ sign_out_route }
+        />
         <Switch>
           <Route exact path="/" component={ Home } />
           <Route path="/apartmentindex" render={ () => <ApartmentIndex apartments={ this.state.apartments } /> } />

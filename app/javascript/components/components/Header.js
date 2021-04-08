@@ -1,0 +1,46 @@
+import React, { Component } from 'react'
+import {
+    Navbar,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    NavbarText
+  } from 'reactstrap';
+
+class Header extends Component {
+    render () {
+        const {
+            logged_in,
+            current_user,
+            new_user_route,
+            sign_in_route,
+            sign_out_route
+          } = this.props
+            return (
+                <>
+                    <Navbar color="light" light expand="md">
+                        <NavbarBrand href="/">ZILLOW</NavbarBrand>
+                            <Nav className="mr-auto" navbar>
+                                <NavItem>
+                                    <NavLink href="/">Buy</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="/apartmentindex">Advertise</NavLink>
+                                </NavItem>
+                                <NavItem className="ml-auto" navbar>
+                                    <NavLink href="/apartmentindex">Manage Properties</NavLink>
+                                </NavItem>
+                            </Nav>
+                            { !logged_in &&
+                                <NavItem>
+                                    <a href={ sign_in_route }>Sign In</a>
+                                </NavItem>
+                            }     
+                    </Navbar>
+                </>
+            )
+        }
+}  
+
+export default Header
