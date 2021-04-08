@@ -21,7 +21,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      apartments: mockApartments
+      apartments: []
     }
   }
 
@@ -36,6 +36,26 @@ class App extends React.Component {
   deleteProperty = (id) => {
     console.log(id)
   }
+
+  componentDidMount(){
+    this.apartmentIndex()
+  }
+
+  apartmentIndex = () => {
+    fetch("http://localhost:3000/apartments")
+    .then(response =>{
+      return response.json()
+    })
+    .then(apartmentsArray => {
+      this.setState({ apartments: apartmentsArray })
+    })
+    .catch(errors => {
+      console.log("index errors:", errors)
+    })
+  }
+
+
+
   //Router wraps route funct
   //Switch manages what page displayed
 
