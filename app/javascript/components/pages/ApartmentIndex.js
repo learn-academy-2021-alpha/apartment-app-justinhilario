@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Card,CardBody, CardTitle, CardSubtitle, CardText, CardLink, Row, Col, Container} from 'reactstrap'
+import { Card,CardBody, CardTitle, CardSubtitle, CardText, Row, Col, Container} from 'reactstrap'
 
 
 class ApartmentIndex extends Component {

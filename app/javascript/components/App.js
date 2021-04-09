@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import ApartmentIndex from './pages/ApartmentIndex.js'
 import ApartmentShow from './pages/ApartmentShow.js'
-import mockApartments from './mockApartments.js'
 import {
   BrowserRouter as Router,
   Route,
@@ -13,6 +12,7 @@ import Header from './components/Header'
 import ApartmentNew from './pages/ApartmentNew'
 import ApartmentUpdate from './pages/ApartmentUpdate'
 import ManageProperties from './pages/ManageProperties'
+//import mockApartments from './MockApartments.js'
 
 
 
@@ -21,7 +21,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      apartments: mockApartments
+      apartments: []
     }
   }
 
@@ -39,6 +39,23 @@ class App extends React.Component {
   //Router wraps route funct
   //Switch manages what page displayed
 
+  componentDidMount(){
+    this.apartmentIndex()
+  }
+
+  apartmentIndex = () => {
+    fetch("http://localhost:3000/apartments")
+    .then(response =>{
+      return response.json()
+    })
+    .then(apartmentsArray => {
+      this.setState({ apartments: apartmentsArray })
+    })
+    .catch(errors => {
+      console.log("index errors:", errors)
+    })
+  }
+
   render() {
     const {
       logged_in,
@@ -47,7 +64,6 @@ class App extends React.Component {
       sign_in_route,
       sign_out_route
     } = this.props
-    console.log(mockApartments)
     console.log("logged_in:", logged_in)
     console.log("current user:", current_user)
     return (

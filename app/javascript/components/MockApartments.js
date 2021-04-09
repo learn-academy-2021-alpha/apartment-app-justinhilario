@@ -1,4 +1,3 @@
-import { CACHE_ID_ATTR } from "react_ujs";
 
 let apartments = [
     {
